@@ -1,10 +1,10 @@
 # Calculadora de Custo de Importação
 
-*Este trabalho tem por objetivo servir de avaliação da segunda unidade para a disciplina de lógica de programação.*
+*Este trabalho tem por objetivo servir de avaliação da segunda unidade para a disciplina de lógica de programação. Todo o trabalho foi desenvolvido utilizando somente lógica de programação, evitando o uso dos paradigmas da orientação a objetos já que não era o objetivo da disciplina*
 
 
 
-## O sistema
+## O SISTEMA
 
 Esse é um "sistemazinho" que tem por finalidade registrar toda a operação de um calculo de custo de importação.
 
@@ -12,7 +12,7 @@ Esse é um "sistemazinho" que tem por finalidade registrar toda a operação de 
 
 ### Tela Inicial:
 
-![]()
+![Tela inicial]([tela inicial.png (478×271) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/tela inicial.png)
 
 A partir desta tela você pode escolher se quer cadastrar, listar, excluir ou editar um registro de importação.
 
@@ -26,7 +26,7 @@ Nesta tela será informado os itens para cadastro. Esses itens são:
 2. A moeda de negociação(exemplo: dólar, euro, libra-esterlina);
 3. A cotação do dia da moeda informada anteriormente;
 4. Descrição do produto importado;
-5. O preço FOB do produto informado;
+5. O preço FOB do produto informado; - [Para saber mais sobre os termos de comercio internacional](https://www.fazcomex.com.br/blog/incoterms-2020-todos-termos/)
 6. O Valor do frete marítimo;
 7. O valor do seguro;
 8. A alíquota do imposto de importação;
@@ -40,15 +40,15 @@ Nesta tela será informado os itens para cadastro. Esses itens são:
 
 ### Tela de Registros cadastrados
 
-![]()
+![Tela de Registro]([lista.png (651×290) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/lista.png)
 
 
 
 ### Tela para edição do Registro
 
-![]()
+![edição1]([edicao1.png (629×366) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/edicao1.png)
 
-![]()
+![edição2]([edicao2.png (699×370) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/edicao2.png)
 
 ## Requisitos da avaliação
 
