@@ -2,6 +2,7 @@
 public class RegistroDeImportacao {
 	int nomeclaturaComumDoMercosul;
 	String descricao;
+	String moeda;
 	double precofob;
 	double freteMar;
 	double seguro;
@@ -11,7 +12,7 @@ public class RegistroDeImportacao {
 	double taxaMar;
 	double despesasLog;
 	double taxaSiscomex;
-	double dolar;
+	double cambio;
 	double DespesaTotalDeImportacao;
 	
 }

@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CalculadoraDeImportacao {
@@ -15,7 +16,11 @@ public class CalculadoraDeImportacao {
 	int controladorDeExclusaoDeRegistro = 0;
 	RegistroDeImportacao[] regImp = new RegistroDeImportacao[20];
 	Scanner leitor = new Scanner(System.in);
-
+	DecimalFormat df = new DecimalFormat("###,###.##");
+	
+	
+	
+	
 	// Funções e Procedimentos
 	public void listarImportacao(RegistroDeImportacao[] itensImp, int flag) {
 
@@ -38,24 +43,29 @@ public class CalculadoraDeImportacao {
 			System.out
 					.println("--------------------------------------------------------------------------------------");
 			System.out.println("Numero do Registro: " + cont);
-			cont++;
-			System.out.println("Dolar Registrado na Fatura: " + itensImp[i].dolar);
+			System.out.println("Moeda Utilizada na operação: " + itensImp[i].moeda);
+			System.out.println("Valor da moeda Registrado na Fatura: " + itensImp[i].cambio);
 			System.out.println(
 					"NCM: " + itensImp[i].nomeclaturaComumDoMercosul + " -- Descrição: " + itensImp[i].descricao);
-			System.out.println("Preço FOB: " + itensImp[i].precofob);
-			System.out.println("Frete Maritimo: " + itensImp[i].freteMar + " Seguro: " + itensImp[i].seguro);
+			System.out.println("Preço FOB (USD$): " + df.format(itensImp[i].precofob));
+			System.out.println("Frete Maritimo (USD$): " + itensImp[i].freteMar + " Seguro (R$): " + itensImp[i].seguro);
 			System.out.println();
 			System.out.println("Impostos: ");
 			System.out.println("I.I: " + itensImp[i].impostoImportacao);
 			System.out.println("IPI: " + itensImp[i].ipi);
 			System.out.println("ICMS: " + itensImp[i].icms);
 			System.out.println("Taxa de Renovação da Marinha Mercante: " + itensImp[i].taxaMar);
-			System.out.println("Despesas com logística: " + itensImp[i].despesasLog);
-			System.out.println(" Taxa do Siscomex: " + itensImp[i].taxaSiscomex);
-			System.out.println("Despesa Total de Importação: " + itensImp[i].DespesaTotalDeImportacao);
+			System.out.println("Despesas com logística (R$): " + itensImp[i].despesasLog);
+			System.out.println("Taxa do Siscomex (R$): " + itensImp[i].taxaSiscomex);
+			
+			System.out.println();
+			
+			System.out.println("Despesa Total de Importação (R$): " + df.format(itensImp[i].DespesaTotalDeImportacao));
 
 			System.out
 					.println("--------------------------------------------------------------------------------------");
+			
+			cont++;
 		}
 
 		System.out.println();
@@ -87,7 +97,7 @@ public class CalculadoraDeImportacao {
 	public double calculaImportacao(RegistroDeImportacao itemImp) {
 
 		// etapa 1 - conversão de moeda
-		double etapa1 = (itemImp.precofob + itemImp.freteMar) * itemImp.dolar;
+		double etapa1 = (itemImp.precofob + itemImp.freteMar) * itemImp.cambio;
 
 		// etapa 2 - adição de I.I
 		double etapa2 = (etapa1 + itemImp.seguro) * (1 + (itemImp.impostoImportacao / 100));
@@ -100,8 +110,10 @@ public class CalculadoraDeImportacao {
 		double etapa4 = etapa3 + (etapa3 / ((100 - itemImp.icms) / 100) * (itemImp.icms / 100));
 
 		// etapa 5 - outras despesas
-		double etapa5 = etapa4 + ((itemImp.freteMar * itemImp.dolar) * (itemImp.taxaMar / 100)) + itemImp.despesasLog
+		double etapa5 = etapa4 + ((itemImp.freteMar * itemImp.cambio) * (itemImp.taxaMar / 100)) + itemImp.despesasLog
 				+ itemImp.taxaSiscomex;
+		
+		
 
 		return etapa5;
 	}
@@ -112,40 +124,45 @@ public class CalculadoraDeImportacao {
 
 		System.out.println("Informe o NCM - Nomeclatura Comum do MercoSul: ");
 		regImp[this.controladorDeCriacaoDeRegistro].nomeclaturaComumDoMercosul = this.leitor.nextInt();
+		
+		System.out.println("Informe a moeda de negociação: ");
+		regImp[this.controladorDeCriacaoDeRegistro].moeda = this.leitor.nextLine();
+		regImp[this.controladorDeCriacaoDeRegistro].moeda = this.leitor.nextLine();
+		
+		System.out.println("Informe o valor da moeda de negociação: ");
+		regImp[this.controladorDeCriacaoDeRegistro].cambio = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		System.out.println("Informe a descrição do Produto: ");
 		regImp[this.controladorDeCriacaoDeRegistro].descricao = this.leitor.nextLine();
 		regImp[this.controladorDeCriacaoDeRegistro].descricao = this.leitor.nextLine();
 
-		System.out.println("Informe o preço do Dolar hoje: ");
-		regImp[this.controladorDeCriacaoDeRegistro].dolar = leitor.nextDouble();
 
-		System.out.println("informe o preço Fob em Dolar: ");
-		regImp[this.controladorDeCriacaoDeRegistro].precofob = leitor.nextDouble();
+		System.out.println("informe o preço de origem (USD$): ");
+		regImp[this.controladorDeCriacaoDeRegistro].precofob = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
-		System.out.println("Informe o valor em dolar do frete Maritimo: ");
-		regImp[this.controladorDeCriacaoDeRegistro].freteMar = leitor.nextDouble();
+		System.out.println("Informe o valor do frete Maritimo(USD$): ");
+		regImp[this.controladorDeCriacaoDeRegistro].freteMar = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
-		System.out.println("Informe o valor do seguro contratado no Brasil em Reais: ");
-		regImp[this.controladorDeCriacaoDeRegistro].seguro = leitor.nextDouble();
+		System.out.println("Informe o valor do seguro contratado no Brasil (R$): ");
+		regImp[this.controladorDeCriacaoDeRegistro].seguro = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		System.out.println("Informe a aliquota do Imposoto de Importação(%): ");
-		regImp[this.controladorDeCriacaoDeRegistro].impostoImportacao = leitor.nextDouble();
+		regImp[this.controladorDeCriacaoDeRegistro].impostoImportacao = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		System.out.println("Informe a aliquota do IPI(%): ");
-		regImp[this.controladorDeCriacaoDeRegistro].ipi = leitor.nextDouble();
+		regImp[this.controladorDeCriacaoDeRegistro].ipi = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
-		System.out.println("Informe a aliquota do ICMS(%: ");
-		regImp[this.controladorDeCriacaoDeRegistro].icms = leitor.nextDouble();
+		System.out.println("Informe a aliquota do ICMS(%): ");
+		regImp[this.controladorDeCriacaoDeRegistro].icms = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		System.out.println("Informe a taxa de renovação da marinha Mercante(%)");
-		regImp[this.controladorDeCriacaoDeRegistro].taxaMar = leitor.nextDouble();
+		regImp[this.controladorDeCriacaoDeRegistro].taxaMar = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
-		System.out.println("Informe as despesas logísticas em reais: ");
-		regImp[this.controladorDeCriacaoDeRegistro].despesasLog = leitor.nextDouble();
+		System.out.println("Informe as despesas logísticas (R$): ");
+		regImp[this.controladorDeCriacaoDeRegistro].despesasLog = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
-		System.out.println(" informe a taxa do Siscomex em reais: ");
-		regImp[this.controladorDeCriacaoDeRegistro].taxaSiscomex = leitor.nextDouble();
+		System.out.println("Informe a taxa do Siscomex (R$): ");
+		regImp[this.controladorDeCriacaoDeRegistro].taxaSiscomex = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		regImp[this.controladorDeCriacaoDeRegistro].DespesaTotalDeImportacao = this
 				.calculaImportacao(regImp[this.controladorDeCriacaoDeRegistro]);
@@ -185,17 +202,17 @@ public class CalculadoraDeImportacao {
 	public void telaInicial() {
 
 		System.out.println();
-		System.out.println("----------------Registro de Importação----------------");
+		System.out.println("----------------CALCULADORA DE CUSTO DE IMPROTAÇÃO----------------");
 		System.out.println();
 		System.out.println();
 
-		System.out.println("Escolhas as opções: ");
-		System.out.println("1 - Cadastrar Importação");
-		System.out.println("2 - Listar importações cadastradas");
-		System.out.println("3 - Editar registros de Importação");
-		System.out.println("4 - Excluir Registro de Importação");
+		System.out.println("ESCOLHAS AS OPÇÕES: ");
+		System.out.println("1 - CADASTRAR REGISTRO DE IMPORTAÇÃO");
+		System.out.println("2 - LISTAR IMPORTAÇÕES CADASTRADAS COM O CUSTO CALCULADO");
+		System.out.println("3 - EDITAR REGISTROS DE IMPORTAÇÃO");
+		System.out.println("4 - EXCLUIR REGISTROS DE IMPORTAÇÃO");
 		System.out.println();
-		System.out.println("0 - Encerra Aplicação");
+		System.out.println("0 - ENCERRAR APLICAÇÃO");
 
 		int opcao = this.leitor.nextInt();
 
@@ -261,9 +278,10 @@ public class CalculadoraDeImportacao {
 			System.out.println("8 - Alterar aliquota do ICMS");
 			System.out.println("9 - Alterar Taxa da Marinha Mercante");
 			System.out.println("10 - Alterar despesas com logística");
-			System.out.println("11 - Alterar o valor do Dolar");
+			System.out.println("11 - Alterar o valor da moeda");
+			System.out.println("12 - Alterar o nome da moeda");
 			System.out.println();
-			System.out.println("12 - para escolher outro registro de Importação");
+			System.out.println("13 - para escolher outro registro de Importação");
 			System.out.println("0 - para sair");
 
 			int opcao2 = this.leitor.nextInt();
@@ -293,44 +311,49 @@ public class CalculadoraDeImportacao {
 			case 2:
 				System.out.println("Digite a nova descrição do produto:  ");
 				regImp[opcao].descricao = this.leitor.nextLine();
+				regImp[opcao].descricao = this.leitor.nextLine();
 				break;
 			case 3:
 				System.out.println("Digite o novo preço FOB: ");
-				regImp[opcao].precofob = this.leitor.nextDouble();
+				regImp[opcao].precofob = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 4:
 				System.out.println("Digite novo o valor do Frete Maritimo: ");
-				regImp[opcao].freteMar = this.leitor.nextDouble();
+				regImp[opcao].freteMar = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 5:
 				System.out.println("Digite o novo valor do Seguro: ");
-				regImp[opcao].seguro = this.leitor.nextDouble();
+				regImp[opcao].seguro = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 6:
 				System.out.println("Digite o novo valor do Imposto de Importação: ");
-				regImp[opcao].impostoImportacao = this.leitor.nextDouble();
+				regImp[opcao].impostoImportacao = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 7:
 				System.out.println("Digite o novo valor para o IPI: ");
-				regImp[opcao].ipi = this.leitor.nextDouble();
+				regImp[opcao].ipi = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 8:
 				System.out.println("Digite o novo valor para o ICMS: ");
-				regImp[opcao].icms = this.leitor.nextDouble();
+				regImp[opcao].icms = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 9:
 				System.out.println("Digite a nova taxa de renovação da Marinha Mercante: ");
-				regImp[opcao].taxaMar = this.leitor.nextDouble();
+				regImp[opcao].taxaMar = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 10:
 				System.out.println("Digite o novo valor para a taxa do SisComex: ");
-				regImp[opcao].taxaSiscomex = this.leitor.nextDouble();
+				regImp[opcao].taxaSiscomex = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 11:
-				System.out.println("Digite o novo valor para o Dolar: ");
-				regImp[opcao].dolar = this.leitor.nextDouble();
+				System.out.println("Digite o novo valor para a moeda: ");
+				regImp[opcao].cambio = this.leitorDeNumerosInteirosPositivosFlutuantes();
 				break;
 			case 12:
+				System.out.println("Digite o novo nome da moeda: ");
+				regImp[opcao].moeda = this.leitor.nextLine();
+				regImp[opcao].descricao = this.leitor.nextLine();
+			case 13:
 				this.editarRegistroDeImportacao();
 				break;
 			default:
@@ -444,9 +467,30 @@ public class CalculadoraDeImportacao {
 
 	}
 
+	public double leitorDeNumerosInteirosPositivosFlutuantes() {
+		
+		double numero;
+		numero = this.leitor.nextDouble();
+		int cont = 0;
+		
+		do {
+			if (numero < 0) {
+				System.out.println("Este campo não aceita numeros negativos, Digite novamente: ");
+				numero = this.leitor.nextDouble();
+				cont = 1;
+			}else {
+				cont = 0;
+			}
+		} while (cont == 1);
+		
+		
+		return numero;
+	}
+	
+	
+	
 	public void encerraApp() {
-
+		System.exit(0);
 	}
 
-	
 }
