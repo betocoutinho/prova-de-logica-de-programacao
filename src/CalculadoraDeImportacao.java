@@ -51,10 +51,12 @@ public class CalculadoraDeImportacao {
 			System.out.println("Frete Maritimo (USD$): " + itensImp[i].freteMar + " Seguro (R$): " + itensImp[i].seguro);
 			System.out.println();
 			System.out.println("Impostos: ");
-			System.out.println("I.I: " + itensImp[i].impostoImportacao);
-			System.out.println("IPI: " + itensImp[i].ipi);
-			System.out.println("ICMS: " + itensImp[i].icms);
-			System.out.println("Taxa de Renovação da Marinha Mercante: " + itensImp[i].taxaMar);
+			System.out.println("I.I (%): " + itensImp[i].impostoImportacao);
+			System.out.println("IPI (%): " + itensImp[i].ipi);
+			System.out.println("ICMS (%): " + itensImp[i].icms);
+			System.out.println();
+			System.out.println("Outras Despesas: ");
+			System.out.println("Taxa de Renovação da Marinha Mercante (%): " + itensImp[i].taxaMar);
 			System.out.println("Despesas com logística (R$): " + itensImp[i].despesasLog);
 			System.out.println("Taxa do Siscomex (R$): " + itensImp[i].taxaSiscomex);
 			
@@ -486,8 +488,6 @@ public class CalculadoraDeImportacao {
 		
 		return numero;
 	}
-	
-	
 	
 	public void encerraApp() {
 		System.exit(0);
