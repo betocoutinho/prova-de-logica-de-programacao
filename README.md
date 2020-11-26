@@ -12,7 +12,7 @@ Esse é um "sistemazinho" que tem por finalidade registrar toda a operação de 
 
 ### Tela Inicial:
 
-![Tela inicial]([tela inicial.png (478×271) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/tela inicial.png)
+![Tela inicial](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/tela inicial.png)
 
 A partir desta tela você pode escolher se quer cadastrar, listar, excluir ou editar um registro de importação.
 
@@ -40,15 +40,17 @@ Nesta tela será informado os itens para cadastro. Esses itens são:
 
 ### Tela de Registros cadastrados
 
-![Tela de Registro]([lista.png (651×290) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/lista.png)
+![Tela de Registro](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/lista.png)
 
 
 
 ### Tela para edição do Registro
 
-![edição1]([edicao1.png (629×366) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/edicao1.png)
+![edição1](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/edicao1.png)
 
-![edição2]([edicao2.png (699×370) (github.com)](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/edicao2.png)
+
+
+![edição2](https://github.com/robercout/prova-de-logica-de-programacao/raw/master/img/edicao2.png)
 
 ## Requisitos da avaliação
 
