@@ -3,14 +3,6 @@ import java.util.Scanner;
 
 public class CalculadoraDeImportacao {
 
-	// Area de execução
-	public static void main(String[] args) {
-		CalculadoraDeImportacao calc1 = new CalculadoraDeImportacao();
-
-		calc1.telaInicial();
-
-	}
-
 	// atributos
 	int controladorDeCriacaoDeRegistro = 0;
 	int controladorDeExclusaoDeRegistro = 0;
