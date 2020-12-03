@@ -166,6 +166,9 @@ public class CalculadoraDeImportacao {
 				.calculaImportacao(regImp[this.controladorDeCriacaoDeRegistro]);
 
 		System.out.println();
+		System.out.println("Cadastro adicionado com sucesso!!!");
+		
+		System.out.println();
 
 		System.out.println("Você gostaria de continuar registrando: ");
 		System.out.println("1 - para continuar");
