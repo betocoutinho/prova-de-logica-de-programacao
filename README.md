@@ -1,5 +1,10 @@
 # Calculadora de Custo de Importação
 
+UNINASSAU OLINDA - SISTEMAS DE INFORMAÇÃO - NOITE
+AVALIAÇÃO DA SEGUNDA UNIDADE DE LOGICA DE PROGRAMAÇÃO ALGORITIMICA
+PROFESSOR: RAONI MONTEIRO
+ALUNOS: ROBERTO GOMES, KATHLEEN CALVALCANTI, CARLOS EDUARDO MEIRA E HUGO HENRIQUE
+
 *Este trabalho tem por objetivo servir de avaliação da segunda unidade para a disciplina de lógica de programação. Todo o trabalho foi desenvolvido utilizando somente lógica de programação, evitando o uso dos paradigmas da orientação a objetos já que não era o objetivo da disciplina*
 
 

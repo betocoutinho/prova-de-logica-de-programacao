@@ -1,6 +1,10 @@
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+//UNINASSAU OLINDA - SISTEMAS DE INFORMAÇÃO - NOITE
+//AVALIAÇÃO DA SEGUNDA UNIDADE DE LOGICA DE PROGRAMAÇÃO ALGORITIMICA
+//PROFESSOR: RAONI MONTEIRO
+//ALUNOS: ROBERTO GOMES, KATHLEEN CALVALCANTI, CARLOS EDUARDO MEIRA E HUGO HENRIQUE
 public class CalculadoraDeImportacao {
 
 	// atributos
@@ -37,8 +41,8 @@ public class CalculadoraDeImportacao {
 			System.out.println("Numero do Registro: " + cont);
 			System.out.println("Moeda Utilizada na operação: " + itensImp[i].moeda);
 			System.out.println("Valor da moeda Registrado na Fatura: " + itensImp[i].cambio);
-			System.out.println(
-					"NCM: " + itensImp[i].nomeclaturaComumDoMercosul + " -- Descrição: " + itensImp[i].descricao);
+			System.out.println("NCM: " + itensImp[i].nomeclaturaComumDoMercosul);
+			System.out.println("Descrição: " + itensImp[i].descricao);
 			System.out.println("Preço FOB (USD$): " + df.format(itensImp[i].precofob));
 			System.out.println("Frete Maritimo (USD$): " + itensImp[i].freteMar + " Seguro (R$): " + itensImp[i].seguro);
 			System.out.println();
@@ -131,7 +135,7 @@ public class CalculadoraDeImportacao {
 		regImp[this.controladorDeCriacaoDeRegistro].descricao = this.leitor.nextLine();
 
 
-		System.out.println("informe o preço de origem (USD$): ");
+		System.out.println("Informe o preço de origem (USD$): ");
 		regImp[this.controladorDeCriacaoDeRegistro].precofob = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		System.out.println("Informe o valor do frete Maritimo(USD$): ");
