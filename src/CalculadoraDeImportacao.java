@@ -43,8 +43,8 @@ public class CalculadoraDeImportacao {
 			System.out.println("Valor da moeda Registrado na Fatura: " + itensImp[i].cambio);
 			System.out.println("NCM: " + itensImp[i].nomeclaturaComumDoMercosul);
 			System.out.println("Descrição: " + itensImp[i].descricao);
-			System.out.println("Preço FOB (USD$): " + df.format(itensImp[i].precofob));
-			System.out.println("Frete Maritimo (USD$): " + itensImp[i].freteMar + " Seguro (R$): " + itensImp[i].seguro);
+			System.out.println("Preço FOB ($): " + df.format(itensImp[i].precofob));
+			System.out.println("Frete Maritimo ($): " + itensImp[i].freteMar + " Seguro (R$): " + itensImp[i].seguro);
 			System.out.println();
 			System.out.println("Impostos: ");
 			System.out.println("I.I (%): " + itensImp[i].impostoImportacao);
@@ -135,10 +135,10 @@ public class CalculadoraDeImportacao {
 		regImp[this.controladorDeCriacaoDeRegistro].descricao = this.leitor.nextLine();
 
 
-		System.out.println("Informe o preço de origem (USD$): ");
+		System.out.println("Informe o preço de origem ($): ");
 		regImp[this.controladorDeCriacaoDeRegistro].precofob = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
-		System.out.println("Informe o valor do frete Maritimo(USD$): ");
+		System.out.println("Informe o valor do frete Maritimo($): ");
 		regImp[this.controladorDeCriacaoDeRegistro].freteMar = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
 		System.out.println("Informe o valor do seguro contratado no Brasil (R$): ");
