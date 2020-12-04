@@ -118,9 +118,13 @@ public class CalculadoraDeImportacao {
 
 	public void cadastraImportacao() {
 
+		// Cria um objeto do registroImportação
 		regImp[this.controladorDeCriacaoDeRegistro] = new RegistroDeImportacao();
 
+		//Nos itens abaixo e escrito o que precisa ser digitado e em seguida o usuario vai informar o valor
 		System.out.println("Informe o NCM - Nomeclatura Comum do MercoSul: ");
+		
+		//Essa estrutura é um objeto(registroDeImportação que esta num array, e receber um valor
 		regImp[this.controladorDeCriacaoDeRegistro].nomeclaturaComumDoMercosul = this.leitor.nextInt();
 		
 		System.out.println("Informe a moeda de negociação: ");
@@ -162,6 +166,8 @@ public class CalculadoraDeImportacao {
 		System.out.println("Informe a taxa do Siscomex (R$): ");
 		regImp[this.controladorDeCriacaoDeRegistro].taxaSiscomex = this.leitorDeNumerosInteirosPositivosFlutuantes();
 
+		
+		//Este objeto(registro de Importação recebe o valor de calculaImportação
 		regImp[this.controladorDeCriacaoDeRegistro].DespesaTotalDeImportacao = this
 				.calculaImportacao(regImp[this.controladorDeCriacaoDeRegistro]);
 
@@ -169,13 +175,16 @@ public class CalculadoraDeImportacao {
 		System.out.println("Cadastro adicionado com sucesso!!!");
 		
 		System.out.println();
-
+		
+		
+		// menu para cadastrar mais ou sair
 		System.out.println("Você gostaria de continuar registrando: ");
 		System.out.println("1 - para continuar");
 		System.out.println("0 - para Voltar a tela inicial");
 
 		int alternativa = this.leitor.nextInt();
 
+		//Estrutura que bloqueia numeros que não sejam 0 e 1 e obriga o usuario a digitar o numero correto
 		int controle1 = 0;
 		do {
 			if (alternativa >= 0 && alternativa <= 1) {
@@ -188,11 +197,15 @@ public class CalculadoraDeImportacao {
 			}
 		} while (controle1 == 1);
 
+		
+		// se você digitou 1 você vai cadastrar novamente se foi 0 você para a tela inicial
 		if (alternativa == 1) {
+			// vai cadastrar outro registro
 			this.controladorDeCriacaoDeRegistro++;
 			this.cadastraImportacao();
 
 		} else {
+			//Volta para tela inicial
 			this.controladorDeCriacaoDeRegistro++;
 			this.telaInicial();
 
@@ -240,21 +253,32 @@ public class CalculadoraDeImportacao {
 	}
 
 	public void editarRegistroDeImportacao() {
+		
+		//Neste bloco de codigo vai verificar se existe um registro de Importação
+		//caso não tiver ele vai informar que não existe
 		if (this.controladorDeCriacaoDeRegistro == 0 && this.regImp[0] == null) {
 			System.out.println("-------------------------------------------------------");
 			System.out.println("Não existe registros de importação");
 			System.out.println("-------------------------------------------------------");
+			//volta para a tela inicial
 			this.telaInicial();
 		}
 
+		
+		//lista todos os registros guardado no vetor
 		this.listarImportacao(regImp, 1);
 		System.out.println();
+		
 		int variavelDeControle1 = 0;
 
+		//escolha um numero para selecionar o registro
 		System.out.println("Escolha o numero do registro para a alteração");
+		
+		//Um vetor começa de 0 a 19, por isso quando o usuario digita o valor 1 na verdade o sistema ler como o valor 0;
 		int opcao = leitor.nextInt() - 1;
 		System.out.println();
 
+		//Estrtura para obrigar a digitar o numero correto
 		int vc2 = 0;
 		do {
 			if (regImp[opcao] == null) {
@@ -265,7 +289,9 @@ public class CalculadoraDeImportacao {
 				vc2 = 0;
 			}
 		} while (vc2 == 1);
-
+		
+		
+		//Submenu para alterar os atributos do registro
 		do {
 			System.out.println("Registro selecionado: " + opcao + 1);
 			System.out.println("Escolha uma das opções abaixo para alteração: ");
@@ -286,11 +312,12 @@ public class CalculadoraDeImportacao {
 			System.out.println("0 - para sair");
 
 			int opcao2 = this.leitor.nextInt();
+			
 			int controlador = 0;
 
-			// Controle de Opção
+			// Estrutura para limitar o valor digitado entre 0 e 13
 			do {
-				if (opcao2 >= 0 && opcao2 <= 12) {
+				if (opcao2 >= 0 && opcao2 <= 13) {
 					controlador = 0;
 				} else {
 					System.out.println();
@@ -300,7 +327,9 @@ public class CalculadoraDeImportacao {
 					controlador = 1;
 				}
 			} while (controlador == 1);
-
+			
+			
+			//Estrura para escolher as opção
 			switch (opcao2) {
 			case 0:
 				this.telaInicial();
@@ -360,12 +389,14 @@ public class CalculadoraDeImportacao {
 			default:
 				break;
 			}
-
+			
+			
+			//Aqui vai ser recalculado a despesa de importação depois de ser feita a edição
 			regImp[opcao].DespesaTotalDeImportacao = this.calculaImportacao(regImp[opcao]);
 
 			System.out.println();
 
-			// Controle de Opção
+			// Limitador para digitar entre 0 e 1
 			System.out.println("Você quer alter outro item do registro [1] para sim e [0] para não");
 			variavelDeControle1 = leitor.nextInt();
 
@@ -385,10 +416,12 @@ public class CalculadoraDeImportacao {
 		} while (variavelDeControle1 == 1);
 
 		System.out.println("Você gostaria de acessar outro registro: [1] para sim e [0] para não");
+		//variavel de controle de repetição = variavel de controle 3
 		int vc3 = this.leitor.nextInt();
 
 		int controle1 = 0;
-
+		
+		//Limitador entre 0 e 1
 		do {
 			if (vc3 == 0 || vc3 == 1) {
 				controle1 = 0;
@@ -401,6 +434,7 @@ public class CalculadoraDeImportacao {
 			}
 		} while (controle1 == 1);
 
+		//Se vc3 for igual 1 você escolhe outro registro se nao volta para a tela inicial.
 		if (vc3 == 1) {
 			this.editarRegistroDeImportacao();
 		} else {
@@ -411,24 +445,31 @@ public class CalculadoraDeImportacao {
 
 	public void deletarRegistroDeImportacao() {
 
+		//Tem a função de informa se existe registro ou não
 		if (this.controladorDeCriacaoDeRegistro == this.controladorDeExclusaoDeRegistro && this.regImp[0] == null) {
 			this.controladorDeCriacaoDeRegistro = 0;
 			this.controladorDeExclusaoDeRegistro = 0;
 		}
 
+		//Quando não existe registro de importação o usuario sera informa do mesmo, caso contrario sera pedido...
+		//que informe o registro de importação
 		if (this.controladorDeCriacaoDeRegistro == 0 && this.regImp[0] == null) {
 			System.out.println("-------------------------------------------------------");
 			System.out.println("Não existe registros de importação");
 			System.out.println("-------------------------------------------------------");
 			this.telaInicial();
 		} else {
-
+			
+			//lista de importação
 			this.listarImportacao(regImp, 1);
 			System.out.println();
 			System.out.println("Informe o numero do registro de importação para deletar: ");
+			//Um vetor começa de 0 a 19, por isso quando o usuario digita o valor 1 na verdade o sistema ler como o valor 0;
 			int numeroRegistro = this.leitor.nextInt() - 1;
 
 			int vc2 = 0;
+			
+			//Limitador que serve para que o usuario digite o valor correto
 			do {
 				if (regImp[numeroRegistro] == null && this.controladorDeExclusaoDeRegistro > 0) {
 					System.out.println("Esse registro não Existe, digite novamente");
@@ -439,6 +480,7 @@ public class CalculadoraDeImportacao {
 				}
 			} while (vc2 == 1);
 
+			//Quando o registro de importação e escolhido o registro que esta dentro do vetor recebe o valor null.
 			this.regImp[numeroRegistro] = null;
 			this.controladorDeExclusaoDeRegistro++;
 
@@ -446,9 +488,10 @@ public class CalculadoraDeImportacao {
 			System.out.println("Gostaria de deletar outro Registro [1] para Sim e [0] para Não: ");
 			int vc3 = this.leitor.nextInt();
 
+			//Estrutura para limitar o valor entre 0 e 1
 			int controle1 = 0;
 			do {
-				if (vc3 >= 0 && vc3 <= 1) {
+				if (vc3 >= 0 || vc3 <= 1) {
 					controle1 = 0;
 				} else {
 					System.out.println();
@@ -458,6 +501,9 @@ public class CalculadoraDeImportacao {
 				}
 			} while (controle1 == 1);
 
+			
+			//Quando o valor for digitado corretamente, se foi 1 outro registro vai ser escolhido para deleter se nao
+			//Volta para a tela inicial
 			if (vc3 == 1) {
 				this.deletarRegistroDeImportacao();
 			} else {
